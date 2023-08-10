@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+    </style>
+    <title>Interactive Shapes</title>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        
+        let circle = { x: 100, y: 100, radius: 30, selected: false, hp: 100, maxHp: 100, attack: 10 };
+        let square = { x: 200, y: 200, size: 60, selected: false, hp: 200, maxHp: 200 };
+        let isDragging = false;
+        let targetX = circle.x;
+        let targetY = circle.y;
+        
+        canvas.addEventListener("mousedown", (e) => {
+            const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+            const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+            
+            if (e.button === 2 && circle.selected) {
+                targetX = mouseX;
+                targetY = mouseY;
+                return;
+            }
+            
+            if (pointInCircle(mouseX, mouseY, circle)) {
+                circle.selected = true;
+                square.selected = false;
+                isDragging = true;
+            } else if (pointInSquare(mouseX, mouseY, square)) {
+                square.selected = true;
+                circle.selected = false;
+            } else {
+                circle.selected = false;
+                square.selected = false;
+            }
+        });
+        
+        canvas.addEventListener("mouseup", () => {
+            isDragging = false;
+        });
+        
+        canvas.addEventListener("mousemove", (e) => {
+            if (isDragging) {
+                const mouseX = e.clientX - canvas.getBoundingClientRect().left;
+                const mouseY = e.clientY - canvas.getBoundingClientRect().top;
+                
+                if (circle.selected) {
+                    circle.x = mouseX;
+                    circle.y = mouseY;
+                }
+            }
+        });
+        
+        canvas.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+            
+            if (circle.selected && square.selected) {
+                circle.x = square.x + square.size / 2;
+                circle.y = square.y + square.size / 2;
+            }
+        });
+        
+        function pointInCircle(x, y, circle) {
+            const dx = x - circle.x;
+            const dy = y - circle.y;
+            return dx * dx + dy * dy <= circle.radius * circle.radius;
+        }
+        
+        function pointInSquare(x, y, square) {
+            return x >= square.x && x <= square.x + square.size &&
+                   y >= square.y && y <= square.y + square.size;
+        }
+        
+        function moveCircleTowardsTarget() {
+            const dx = targetX - circle.x;
+            const dy = targetY - circle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance > 1) {
+                const speed = 2;
+                circle.x += dx * speed / distance;
+                circle.y += dy * speed / distance;
+            }
+        }
+        
+        function updateSquareHP() {
+            if (pointInSquare(circle.x, circle.y, square)) {
+                square.hp -= circle.attack;
+            }
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            moveCircleTowardsTarget();
+            updateSquareHP();
+            
+            ctx.fillStyle = circle.selected ? "blue" : "black";
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = square.selected ? "red" : "black";
+            ctx.fillRect(square.x, square.y, square.size, square.size);
+            
+            ctx.fillStyle = "green";
+            ctx.fillRect(square.x, square.y - 10, (square.hp / square.maxHp) * square.size, 5);
+            
+            ctx.fillStyle = "black";
+            ctx.font = "14px Arial";
+            ctx.fillText(`HP: ${circle.hp}`, circle.x - 20, circle.y - circle.radius - 10);
+            ctx.fillText(`HP: ${square.hp}`, square.x, square.y - 15);
+        }
+        
+        setInterval(draw, 10); // Mise à jour du dessin chaque 10 millisecondes
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+Je veux créer un jeu du genre RTS en HTML CSS et JavaScript. Pour se faire je vais utiliser le framework PHASER 3.
+Je vais utiliser un canva et mettre à l'intérieur tous les éléments du jeu.
+
+Pour commencer j'ai besoin que tu m'écrives le code pour : 
+
+    1. Avoir un canvas du jeu en résolution 1200 x 800 px, dont le jeu sera mis à jour en temps réel.
+
+    2. Dans ce canva en haut à gauche, il me faut les matières premières stockées par le joueur ( qui apparaissent comme ça : 5 / 50 ): 
+        - Le bois
+        - La pierre
+        - Le tissu
+        - Le métal
+
+    3. Dans ce canva en haut à droite, il me faut un menu avec plusieurs boutons clickables, lesquels feront apparaitre des informations sur le jeu, sous forme de pop-up. Ces pop-ups disparaissent si l'on click de nouveau sur le bouton dans le menu ou si l'on click à côté dans le canva.
+    Les boutons sont : 
+        - économie, 
+        - démographie, 
+        - construction, 
+        - militaire, 
+        - marine, 
+        - technologies.
+
+        3.a. Le bouton économie fait apparaitre les informations économiques (calculées en pièces avec pour devise le $) de la faction du joueur comme :
+        - Les revenus :
+            - Le taux d'imposition
+            - Les taxes
+            - Les ventes commerciales
+        - Les dépenses :
+            - Les frais d'entretien du domaine publique
+            - Les salaires des fonctionnaires
+            - Les dépenses militaires :
+                - Salaires des soldats
+                - Entretiens des canons
+                - Entretien des bâtiments militaires
+        3.b. Le bouton démographie fait apparaitre les informations démographiques de la faction du joueur comme :
+        - Le nombre total d'habitants : 
+            - nombre d'hommes
+            - nombre de femmes
+            - nombre d'enfants
+        - Les catégories sociau-professionnelles
+            - employés
+            - fonctionnaires
+            - militaires
+        3.c. Le bouton construction fait apparaitre les différents bâtiments constructibles de la faction du joueur comme :
+            - Bâtiments civiles :
+                - Mairie
+                - Habitations
+                - Routes
+                - Commerces 
+                - Ateliers
+            - Bâtiments militaires :
+                - Caserne
+                - Champs d'entrainement
+                - Fort 
+                - Mur d'enceinte
+            - Bâtiments navaux :
+                - Bureau portuaire
+                - Atelier de pêche
+                - Quai de débarquement et embarquement
+                - Phare
+        3.d. Le bouton militaire fait apparaitre les informations militaires de la faction du joueur comme :
+            - Le nombre de soldats
+            - Le nombre de canons
+            - Le nombre de bâtiments militaire
+            - Le nombre de soldats en formation et recrutables
+        3.e. Le bouton marine fait apparaitre les informations sur la marine de la faction du joueur comme :
+            - Le nombre de navires de commerce 
+            - Le nombre de navires militaires
+            - Le nombre de navires en construction
+        3.f. Le bouton technologies fait apparaitre les informations technologiques de la faction du joueur comme :
+            - Les technologies économiques
+            - Les technologies sociales
+            - Les technologies militaires
+            - Les technologies commerciales
+
+    4. Lorsque l'on click sur l'un des bâtiments du menu construction, on doit pouvoir placer sur la map du jeu le bâtiment.
+
+    5. Chaque bâtiment nécessite un nombre d'habitant à lui attribuer pour qu'il fonctionne correctement.
+
+    6. De base le joueur possède 50 habitants, représentés pour l'instant par des points noirs. 
+    
+    7. Pour avoir des habitants le joueur doit construire le bâtiment "habitation" sur la carte de jeu. Ce bâtiment confère 5 habitants.
+
+    8. Pour construire cette habitatio, le joueur doit posséder les ressources nécessaires. Une habitation coute :
+        - 5 bois
+        - 2 pierres
+        - 1 métal
+
+    9. Le joueur commence la partie avec 50 de bois, 25 de métal, 25 de pierre, 25 de tissu.
+
+    10. Les bâtiments de récolte qui permettent de récolter des ressources sont :
+        - "bucheron" qui permet de récolter du bois
+        - "tailleur de pierre" qui permet de récolter de la pierre
+        - "mineur" qui permet de récolter du métal
+        - "tisserand" qui permet de récolter du tissu
+    Il faut 5 habitants par bâtiment de récolte pour récolter 1 ressource en 10 secondes.
+
+    11. Lorsque le personnage click sur un bâtiment, 5 habitants y sont attribués pour faire fonctionner le bâtiment. 
+
+
+
+
+
+
+
+    
