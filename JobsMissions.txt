@@ -1,0 +1,100 @@
+        const jobs = 
+        [
+            { name: "Livraison Spéciale", description: "Va livrer le paquet dans le coffre.", executionConditions: " Le véhicule ne doit pas être détruit ou disparaitre. "  },
+            { name: "Vol de Véhicule", description: "Va voler le véhicule.", executionConditions: " Le véhicule ne doit pas être détruit ou disparaitre. " },
+            { name: "Deal", description: "Participe au deal entre gangs.", executionConditions: " Si ça dérape, récupère le fric et la came. " },
+            { name: "Aggression", description: "Va tabasser ce mec.", executionConditions: " Tabasse le mec mais il ne doit pas mourir. " },
+            { name: "Meurtre", description: "Refroidis ce mec.", executionConditions: " La cible ne doit pas survivre. " },
+            { name: "Garde du Corps", description: "Protège ton pote.", executionConditions: " Ton pote ne doit pas être KO ou mourir. " }
+        ];
+
+        const missions = 
+        [
+            "Retrieve classified documents",
+            "Infiltrate enemy base",
+            "Rescue hostages",
+            "Disable security systems",
+            "Deliver important package",
+            "Eliminate high-value target"
+        ];
+
+        const generateButton = document.getElementById("generateButton");
+        const missionList = document.getElementById("missionList");
+
+        generateButton.addEventListener("click", generateMission);
+
+        function generateMission() {
+            const randomJob = jobs[Math.floor(Math.random() * jobs.length)];
+            const randomMission = missions[Math.floor(Math.random() * missions.length)];
+
+            const missionItem = document.createElement("li");
+            missionItem.textContent = `Job: ${randomJob}, Mission: ${randomMission}`;
+            missionList.appendChild(missionItem);
+        }
+
+-------------------------------------------------------------------------------------
+
+          //-------------------------------------------------------------------\\
+         //-------------------------RUSSIAN MAFIA JOBS--------------------------\\
+        //-----------------------------------------------------------------------\\
+
+        const jobsRussianMafia = 
+        [
+            { name: "Livraison Spéciale", description: "Va chercher puis livrer le paquet.", executionConditions: " Le véhicule ne doit pas être détruit ou disparaitre. "  },
+            { name: "Import/Export", description: "Va chercher le camion et apporte le à l'endroit indiqué.", executionConditions: " Le camion ne doit pas être détruit ou disparaitre. " },
+            { name: "Meurtre", description: "Refroidis ce mec.", executionConditions: " La cible ne doit pas survivre. " },
+            { name: "Garde du Corps", description: "Protège le VIP.", executionConditions: " Le VIP ne doit pas être KO ou mourir. " }
+        ];
+
+        const jobsLocationsRussianMafia = 
+        [
+            // BROKER
+            "BROKER - BOABO",
+            "BROKER - Downtown",
+            "BROKER - East Hook",
+            "BROKER - Outlook",
+            "BROKER - South Slopes", 
+            "BROKER - Schottler",
+            "BROKER - Beechwood City",
+            "BROKER - Hove Beach",
+            "BROKER - Firefly Projects",
+            "BROKER - Firefly Island",
+            "BROKER - Beachgate",
+            // DUKES
+            "DUKES - Steinway",
+            "DUKES - Meadows Park",
+            "DUKES - East Island City", 
+            "DUKES - Meadow Hills",
+            "DUKES - Willis",
+            "DUKES - Francis International Airport",
+            "DUKES - Cerveza Heights",
+            // BOHAN
+            "BOHAN - Boulevard",
+            "BOHAN - Chase Point",
+            "BOHAN - Fortside",
+            "BOHAN - Industrial",
+            "BOHAN - Little Bay",
+            "BOHAN - Northern Gardens",
+            "BOHAN - South Bohan"
+        ];
+
+        const jobsCharactersRussianMafia = 
+        [
+            "Niko",
+            "Niko + Dimitri",
+            "Niko + 1 garde du corps",
+            "Niko + 2 garde du corps",
+            "Niko + Dimitri + 2 garde du corps",
+        ];
+
+        const jobsMoneyAmountRussianMafia = 
+        [
+            "4.000 $",
+            "5.000 $",
+            "6.000 $",
+            "7.000 $",
+            "8.000 $",
+            "9.000 $",
+            "10.000 $",
+            "25.000 $"
+        ];

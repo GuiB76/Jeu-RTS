@@ -105,6 +105,7 @@ Celui-ci serait constitué de tableaux contenant les informations à afficher da
 2 catégories à générer alétoirement : 
     - Jobs
     - Missions
+Créé moi une interface utilisateur agréable pour commencer.
 
 Explications : 
 
@@ -118,11 +119,155 @@ Sur la page il y a 2 catégories, 1 = Jobs, 2 = Missions
         - Les conditions d'execution
         - La somme d'argent touchée pour l'execution du job
 
-        TABLEAUX DES JOBS : 
     
+Listing quartiers :
 
+// BROKER
+"BROKER - BOABO",
+"BROKER - Downtown",
+"BROKER - East Hook",
+"BROKER - Outlook",
+"BROKER - South Slopes", 
+"BROKER - Schottler",
+"BROKER - Beechwood City",
+"BROKER - Hove Beach",
+"BROKER - Firefly Projects",
+"BROKER - Firefly Island",
+"BROKER - Beachgate",
+// DUKES
+"DUKES - Steinway",
+"DUKES - Meadows Park",
+"DUKES - East Island City", 
+"DUKES - Meadow Hills",
+"DUKES - Willis",
+"DUKES - Francis International Airport",
+"DUKES - Cerveza Heights",
+// BOHAN
+"BOHAN - Boulevard",
+"BOHAN - Chase Point",
+"BOHAN - Fortside",
+"BOHAN - Industrial",
+"BOHAN - Little Bay",
+"BOHAN - Northern Gardens",
+"BOHAN - South Bohan",
+// ALGONQUIN
+"ALGONQUIN - Castle Garden City",
+"ALGONQUIN - Castle Gardens",
+"ALGONQUIN - Chinatown",
+"ALGONQUIN - City Hall",
+"ALGONQUIN - East Holland",
+"ALGONQUIN - Easton",
+"ALGONQUIN - Fismarket North ",
+"ALGONQUIN - Fishmarkert South",
+"ALGONQUIN - Hatton Gardens",
+"ALGONQUIN - Lancaster",
+"ALGONQUIN - Little Italy",
+"ALGONQUIN - Lower Easton",
+"ALGONQUIN - Middle Park",
+"ALGONQUIN - Middle Park West",
+"ALGONQUIN - Middle Park East",
+"ALGONQUIN - North Holland",
+"ALGONQUIN - Presidents City",
+"ALGONQUIN - Purgatory",
+"ALGONQUIN - Star Junction",
+"ALGONQUIN - Suffolk",
+"ALGONQUIN - The Exchange",
+"ALGONQUIN - The Meat Quarter",
+"ALGONQUIN - The Triangle",
+"ALGONQUIN - Varsity Heights",
+"ALGONQUIN - Westminster",
+//ALDERNEY
+"ALDERNEY - Leftwood",
+"ALDERNEY - Westdyke",
+"ALDERNEY - Acter",
+"ALDERNEY - Normandy",
+"ALDERNEY - Alderney City",
+"ALDERNEY - Tudor",
+"ALDERNEY - Port Tudor",
+"ALDERNEY - Acter Industrial Park",
+"ALDERNEY - Alderney State Correctional Facility",
 
-    2. 
+ÎLES DE ALGONQUIN :
+Charge Island
+Colony Island
+Happiness Island 
 
+_______________________________________________________________________________________________________
 
-    
+Refais moi la fonction afin qu'elle affiche aléatoirement :
+- jobs :
+    - name
+    - description
+    - executionConditions
+- jobsLocations
+- jobsCharacters
+- jobsMoneyAmount
+
+Si le name est "Livraison Spéciale" ou "Deal", affiche 2 jobsLocations
+
+const jobs = 
+[
+    { name: "Livraison Spéciale", description: "Va livrer le paquet dans le coffre.", executionConditions: " Le véhicule ne doit pas être détruit ou disparaitre. "  },
+    { name: "Vol de Véhicule", description: "Va voler le véhicule.", executionConditions: " Le véhicule ne doit pas être détruit ou disparaitre. " },
+    { name: "Deal", description: "Participe au deal entre gangs.", executionConditions: " Si ça dérape, récupère le fric et la came. " },
+    { name: "Aggression", description: "Va tabasser ce mec.", executionConditions: " Tabasse le mec mais il ne doit pas mourir. " },
+    { name: "Garde du Corps", description: "Protège ton pote.", executionConditions: " Ton pote ne doit pas être KO ou mourir. " }
+];
+
+const jobsLocations = 
+[
+    // BROKER
+    "BROKER - BOABO",
+    "BROKER - Downtown",
+    "BROKER - East Hook",
+    "BROKER - Outlook",
+    "BROKER - South Slopes", 
+    "BROKER - Schottler",
+    "BROKER - Beechwood City",
+    "BROKER - Hove Beach",
+    "BROKER - Firefly Projects",
+    "BROKER - Firefly Island",
+    "BROKER - Beachgate",
+    // DUKES
+    "DUKES - Steinway",
+    "DUKES - Meadows Park",
+    "DUKES - East Island City", 
+    "DUKES - Meadow Hills",
+    "DUKES - Willis",
+    "DUKES - Francis International Airport",
+    "DUKES - Cerveza Heights",
+    // BOHAN
+    "BOHAN - Boulevard",
+    "BOHAN - Chase Point",
+    "BOHAN - Fortside",
+    "BOHAN - Industrial",
+    "BOHAN - Little Bay",
+    "BOHAN - Northern Gardens",
+    "BOHAN - South Bohan"
+];
+
+const jobsCharacters = 
+[
+    "Niko",
+    "Niko + Little Jacod",
+    "Niko + 1 garde du corps",
+    "Niko + 2 garde du corps",
+    "Niko + Brucie",
+];
+
+const jobsMoneyAmount = 
+[
+    "500 $",
+    "1.000 $",
+    "1.500 $",
+    "2.000 $",
+    "2.500 $",
+    "3.000 $",
+    //"4.000 $",
+    //"5.000 $",
+    //"6.000 $",
+    //"7.000 $",
+    //"8.000 $",
+    //"9.000 $",
+    //"10.000 $",
+];

@@ -35,7 +35,7 @@
             .failure { color: red; }
             .counters { position: absolute; top: 10px; right: 10px; font-size: 14px; }
             /* COLONNES */
-            .global-container { display: flex; }
+            .container { display: flex; }
             .column { flex: 1; padding: 20px; box-sizing: border-box; }
             /* Map de Liberty City */
             .LC-map-container { position: relative; }
@@ -49,43 +49,24 @@
 
     <body>
 
-        <header>
+        <div class="counters">
+            <p>Missions: <span id="totalMissions">0</span></p>
+            <p>Missions Réussies: <span id="successMissions">0</span></p>
+            <p>Missions Ratées: <span id="failureMissions">0</span></p>
+        </div>
+    
+        <br><br>
+        <h1> Générateur Alétoire de Jobs </h1>
+        <br><br>
+        <div id="jobGenerator">
+            <h2> Side Jobs </h2>
+            <button id="generateJobsButton"> Générer un Side Job </button>
+            <ul id="JobsList"></ul>
+        </div>
 
-        </header>
-
-        <main>
-
-            <div class="counters">
-                <p>Missions: <span id="totalMissions">0</span></p>
-                <p>Missions Réussies: <span id="successMissions">0</span></p>
-                <p>Missions Ratées: <span id="failureMissions">0</span></p>
-            </div>
-        
-            <br><br>
-            <h1> Générateur Alétoire de Jobs </h1>
-            <br><br>
-            <div>
-                <!-- Colonne 1 -->
-                <div id="jobGenerator">
-                    <h2> Side Jobs </h2>
-                    <button id="generateJobsButton"> Générer un Side Job </button>
-                    <ul id="JobsList"></ul>
-                </div>
-                <!-- Colonne 2 -->
-                <div class="LC-map-container ">
-                    <img class="LC-map-image" src="Liberty_city.webp" alt="Carte des quartiers de Liberty City" />
-                </div>
-            </div>
-        
-        </main>
-
-        <footer>
-
-        </footer>
-
-        <!------------------------------------------------------------------------------------------->
-        <!-------------------------------------- JAVASCRIPT ----------------------------------------->
-        <!------------------------------------------------------------------------------------------->
+        <div class="LC-map-container">
+            <img class="LC-map-image" src="Liberty_city.webp" alt="Carte des quartiers de Liberty City" />
+        </div>
 
         <script>
             // Map of Liberty City Boroughs Districts
