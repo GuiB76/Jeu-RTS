@@ -98,9 +98,31 @@ Pour commencer j'ai besoin que tu m'écrives le code pour :
     11. Lorsque le personnage click sur un bâtiment, 5 habitants y sont attribués pour faire fonctionner le bâtiment. 
 
 
+_______________________________________________________________________________________________________
+
+Je veux créer en HTML CSS JavaScript, pour un jeu vidéo, un générateur aléatoire de missions. 
+Celui-ci serait constitué de tableaux contenant les informations à afficher dans un ordre spécifique. 
+2 catégories à générer alétoirement : 
+    - Jobs
+    - Missions
+
+Explications : 
+
+Sur la page il y a 2 catégories, 1 = Jobs, 2 = Missions
+
+    1. Lorsque l'utilisateur fait un clic sur le bouton Jobs la génération aléatoire se lance et affiche :
+        - Le nom du Job
+        - La localisation
+        - Les personnages impliqués
+        - Le descriptif du job
+        - Les conditions d'execution
+        - La somme d'argent touchée pour l'execution du job
+
+        TABLEAUX DES JOBS : 
+    
 
 
-
+    2. 
 
 
     
