@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> MAP </title>
+
     <style>
         body 
         {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* overflow: hidden; */
+        }
+        #sticky-header
+        {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width : 250px;
+            height: 250px;
+            background-color: white;
+            border: 1px black;
+            z-index: 100;
         }
         #container 
         {
-            /* position: relative; 
-            /* width: 800px;
-            height: 800px; 
-            overflow: auto;
-            border: 1px solid black; */
+            position: relative;
         }
         #image 
         {
@@ -26,116 +36,112 @@
             left: 0;
             pointer-events: none;
         }
-        #circle 
+        .circle 
         {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: red;
-            border-radius: 10%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
             pointer-events: auto;
             transform: translate(-50%, -50%);
+            cursor: grab;
         }
     </style>
-    <title>Move Circle on Yellow Pixels</title>
+
+
 </head>
+
+
 <body>
-    <div id="container">
-        <img id="image" src="map-test.jpg" alt="Map Image">
-        <div id="circle"></div>
-    </div>
+
+    <header id="sticky-header">
+        <p id="mouseX">Position X: 0</p>
+        <p id="mouseY">Position Y: 0</p>
+    </header>
+
+    <main>
+        <div id="container">
+            <img id="image" src="map-test.jpg" alt="Map Image">
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+
     <script>
+
         const container = document.getElementById("container");
-        const circle = document.getElementById("circle");
         const image = document.getElementById("image");
-        const yellowPixels = [];
+        const circles = [];
+        const colors = ['green', 'purple', 'yellow', 'lightblue'];
 
         image.addEventListener("load", handleImageLoad);
-        circle.addEventListener("mousedown", startDragging);
 
-        function handleImageLoad() {
-            const context = createCanvasContext(image);
-            const imageData = context.getImageData(0, 0, image.width, image.height);
-            const pixels = imageData.data;
-
-            for (let i = 0; i < pixels.length; i += 4) {
-                const red = pixels[i];
-                const green = pixels[i + 1];
-                const blue = pixels[i + 2];
-                if (compareColors(red, green, blue, 254, 239, 2)) {
-                    yellowPixels.push(iToXY(i / 4, image.width));
-                }
-            }
-
-            // Set initial position of the circle
-            setPositionOnYellowPixel(0);
+        function handleImageLoad() 
+        {
+            fetch('circles.json') // Change this to the actual path of your JSON file
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(circle => {
+                    createCircle(circle.number, circle.x, circle.y, circle.color);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading circles JSON:", error);
+            });
         }
 
-        function setPositionOnYellowPixel(index) {
-            const { x, y } = yellowPixels[index];
+        function createCircle(number, x, y, color) 
+        {
+            const circle = document.createElement('div');
+            circle.className = 'circle';
             circle.style.left = x + "px";
             circle.style.top = y + "px";
+            circle.style.backgroundColor = color;
+            container.appendChild(circle);
+
+            circle.addEventListener('click', function () {
+                const newColor = colors[(colors.indexOf(circle.style.backgroundColor) + 1) % colors.length];
+                circle.style.backgroundColor = newColor;
+                saveCircleData();
+            });
+
+            circle.addEventListener('mousedown', startDragging);
+            circle.number = number;
         }
 
-        function startDragging(event) {
-            event.preventDefault();
-            document.addEventListener("mousemove", dragCircle);
-            document.addEventListener("mouseup", stopDragging);
-            circle.classList.add("dragging");
-        }
 
-        function dragCircle(event) {
-            event.preventDefault();
-            const containerRect = container.getBoundingClientRect();
-            const x = event.clientX - containerRect.left;
-            const y = event.clientY - containerRect.top;
-            const nearestYellowPixel = findNearestYellowPixel(x, y);
-            circle.style.left = nearestYellowPixel.x + "px";
-            circle.style.top = nearestYellowPixel.y + "px";
-        }
+        function startDragging(event) 
+        {
+            const circle = event.target;
+            const offsetX = event.clientX - circle.getBoundingClientRect().left;
+            const offsetY = event.clientY - circle.getBoundingClientRect().top;
 
-        function stopDragging(event) {
-            event.preventDefault();
-            document.removeEventListener("mousemove", dragCircle);
-            document.removeEventListener("mouseup", stopDragging);
-            circle.classList.remove("dragging");
-        }
+            document.addEventListener('mousemove', dragCircle);
+            document.addEventListener('mouseup', stopDragging);
 
-        function findNearestYellowPixel(x, y) {
-            let minDistance = Number.MAX_SAFE_INTEGER;
-            let nearestPixel = null;
-            for (const pixel of yellowPixels) {
-                const distance = Math.sqrt((pixel.x - x) ** 2 + (pixel.y - y) ** 2);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    nearestPixel = pixel;
-                }
+            function dragCircle(event) 
+            {
+                const x = event.clientX - container.getBoundingClientRect().left - offsetX;
+                const y = event.clientY - container.getBoundingClientRect().top - offsetY;
+
+                circle.style.left = x + 'px';
+                circle.style.top = y + 'px';
+
+                // Update the position display
+                const mouseXDisplay = document.getElementById('mouseX');
+                const mouseYDisplay = document.getElementById('mouseY');
+                mouseXDisplay.textContent = `Position X: ${x}`;
+                mouseYDisplay.textContent = `Position Y: ${y}`;
             }
-            return nearestPixel;
-        }
 
-        function createCanvasContext(imageElement) {
-            const canvas = document.createElement("canvas");
-            canvas.width = imageElement.width;
-            canvas.height = imageElement.height;
-            const context = canvas.getContext("2d");
-            context.drawImage(imageElement, 0, 0);
-            return context;
-        }
-
-        function compareColors(r1, g1, b1, r2, g2, b2) {
-            const threshold = 30;
-            return (
-                Math.abs(r1 - r2) <= threshold &&
-                Math.abs(g1 - g2) <= threshold &&
-                Math.abs(b1 - b2) <= threshold
-            );
-        }
-
-        function iToXY(i, width) {
-            const y = Math.floor(i / width);
-            const x = i - y * width;
-            return { x, y };
+            function stopDragging() 
+            {
+                document.removeEventListener('mousemove', dragCircle);
+                document.removeEventListener('mouseup', stopDragging);
+            }
         }
     </script>
 </body>
