@@ -29,7 +29,7 @@
         {
             position: relative;
         }
-        #image 
+        #map 
         {
             position: absolute;
             top: 0;
@@ -38,13 +38,21 @@
         }
         .circle 
         {
-            position: absolute;
-            width: 20px;
-            height: 20px;
+            position: relative;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             pointer-events: auto;
             transform: translate(-50%, -50%);
             cursor: grab;
+        }
+        .circle img 
+        {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: -50px;
+            left: -22px;
         }
     </style>
 
@@ -61,7 +69,7 @@
 
     <main>
         <div id="container">
-            <img id="image" src="map-test.jpg" alt="Map Image">
+            <img id="map" src="GTAV-HD-MAP-satellite.jpg" alt="Map Image">
         </div>
     </main>
 
@@ -73,22 +81,25 @@
     <script>
 
         const container = document.getElementById("container");
-        const image = document.getElementById("image");
+        const map = document.getElementById("map");
         const circles = [];
         const colors = ['green', 'purple', 'yellow', 'lightblue'];
 
-        image.addEventListener("load", handleImageLoad);
+        map.addEventListener("load", handleImageLoad);
 
         function handleImageLoad() 
         {
             fetch('circles.json') // Change this to the actual path of your JSON file
             .then(response => response.json())
-            .then(data => {
-                data.forEach(circle => {
+            .then(data => 
+            {
+                data.forEach(circle => 
+                {
                     createCircle(circle.number, circle.x, circle.y, circle.color);
                 });
             })
-            .catch(error => {
+            .catch(error => 
+            {
                 console.error("Error loading circles JSON:", error);
             });
         }
@@ -100,9 +111,31 @@
             circle.style.left = x + "px";
             circle.style.top = y + "px";
             circle.style.backgroundColor = color;
+
+            const groupImage = document.createElement('img');
+            switch (color) 
+            {
+                case 'green':
+                    groupImage.src = 'logos/18866.webp'; 
+                    break;
+                case 'purple':
+                    groupImage.src = 'logos/5346.webp'; 
+                    break;
+                case 'yellow':
+                    groupImage.src = 'logos/18398.webp'; 
+                    break;
+                case 'lightblue':
+                    groupImage.src = 'logos/139951.png'; 
+                    break;
+                default:
+                    break;
+            }
+
+            circle.appendChild(groupImage);
             container.appendChild(circle);
 
-            circle.addEventListener('click', function () {
+            circle.addEventListener('click', function () 
+            {
                 const newColor = colors[(colors.indexOf(circle.style.backgroundColor) + 1) % colors.length];
                 circle.style.backgroundColor = newColor;
                 saveCircleData();
